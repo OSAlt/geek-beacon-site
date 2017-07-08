@@ -1,9 +1,11 @@
 body {
-  background: url(../images/bg.png) no-repeat center center fixed; 
+  background: url(../images/bg.png); 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
