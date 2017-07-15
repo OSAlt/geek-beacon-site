@@ -1,8 +1,12 @@
+### live at [www.geekbeacon.org](http://www.geekbeacon.org/) :tada: :tada:
+
 # Deploying
 
-exporting site:
+#### exporting site:
 
+```
 git archive --format tar  HEAD  |  gzip  > site.tgz 
+```
 
 copy site.tgz and replace old html dir with current archive. 
 
