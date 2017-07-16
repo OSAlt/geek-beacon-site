@@ -58,9 +58,9 @@ nav img{
 		width: 145px;
 		height: auto;
 }
-@media screen and (max-width: 1180px){
+@media screen and (max-width: 1200px){
 	nav img{
-			width: 110px;
+			width: 100px;
 	}
 }
 
