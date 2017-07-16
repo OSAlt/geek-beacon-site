@@ -96,7 +96,7 @@ nav img{
 iframe{
 /* 	position:relative;
 	top:0; */
-	background:url(../images/loading.svg) center -200px no-repeat;
+	background:url(../images/loading.svg) center 1000px no-repeat;
 	 background-size: 100px ;
 }
 .yt-cont{
