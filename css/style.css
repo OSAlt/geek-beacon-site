@@ -69,6 +69,14 @@ nav img{
 			width: 115px;
 	}
 }
+@media screen and (max-width: 1070px) and (min-width: 522px){
+	nav img{
+			width: 130px;
+	}
+	body{
+		background-position: center 15px;
+	}
+}
 @media screen and (max-width: 520px){
 	nav img{
 			width: 100px;
