@@ -1,115 +1,131 @@
-body {
-	background: url(../images/background_improved.png);
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center -50px;
-	background-attachment: fixed;
+/*
+  http://meyerweb.com/eric/tools/css/reset/
+  v2.0 | 20110126
+  License: none (public domain)
+*/
+a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
 
-	font-family: Arial, Helvetica, sans-serif;
-	color: white;
+*{
+		box-sizing: border-box;
+}
+html, body{
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
 }
 
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 1/2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
-	body {
-		background: url('../images/bg@2x.png') no-repeat cover;
-		background-position: center -50px;
+body{
+  position: relative;
+	padding-bottom: 100px;
+}
+body{
+    background-image: url(../images/background_improved.png);
+    background-position: center center;
+    background-repeat:  no-repeat;
+    background-attachment: fixed;
+    background-size:  cover;
+    background-color: #35265e;
+}
+
+
+/* */
+.hvr-glow:hover{ /* glow background on hover */
+		-webkit-box-shadow: 0 0 5px 4px rgba(255, 255, 255, 0.81);
+		-moz-box-shadow: 0 0 5px 4px rgba(255, 255, 255, 0.81);
+		box-shadow: 0 0 5px 4px rgba(255, 255, 255, 0.81);
+}
+/* */
+
+
+/* header start */
+/* header end */
+
+
+/* nav start */
+nav{
+	  text-align: center;
+	  padding: 220px 3% 20px 3%;
+}
+nav li{
+    display: inline-block;
+		margin: 2%;
+}
+nav a{
+		display: inline-block;
+		box-shadow: 0 0 5px 4px rgba(0, 255, 255, 0.61);
+		-webkit-box-shadow: 0 0 5px 4px rgba(0, 255, 255, 0.61);
+		-moz-box-shadow: 0 0 5px 4px rgba(0, 255, 255, 0.61);
+}
+nav img{
+		width: 140px;
+		height: auto;
+}
+
+@media screen and (max-width: 520px){
+	nav img{
+			width: 100px;
 	}
 }
+/* nav end */
 
-.body-wrap {
-	width: 100%;
+
+/* main content start */
+/* main content end */
+
+
+/* youtube and form containers - start */
+iframe{
+	background:url(../images/loading.svg) center center no-repeat;
+	 background-size: 100px ;
 }
-.iframe-container{
-    height:850px;
+.yt-cont{
+    margin: 0 auto 40px auto;
+    max-width: 750px;
+    padding: 2%;
 }
-.inner {
-	margin: 1em auto;
-	width: 100%;
-	text-align: center;
+.yt-wrap{
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    resize: both;
 }
-
-.btn {
-	display: inline-block;
-	width: 140px;
-	height: auto;
+.yt-cont iframe{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
-
-
-iframe.gaming {
-	margin: 0 21.5%;
-	display: block;
-	border: 3px solid black;
-	position: absolute;
-	width: 57%;
-	height: calc(100% - 316px);
-	top: 308px;
+.form-cont{
+    padding: 25px 2%;
+    text-align: center;
 }
-
-
-img.sel {
-	margin: 0 10px;
+.form-cont iframe{
+    width: 100%;
+    max-width: 900px;
+    height: 500px;
 }
+/* youtube and form containers - end */
 
-iframe {
-	margin: 2.5% 2.5%;
-	display: block;
-	border: 3px solid black;
-	position: absolute;
-	width: 90%;
-	height: calc(100% - 316px);
-	top: 308px;
-    height:575px;
+
+/* footer start */
+footer{
+		position: absolute;
+	  left: 0;
+	  right: 0;
+	  bottom: 0px;
+	  padding: 15px 5px;
+	  text-align: center;
+	  color: #3fc9f7;
+	  font-weight: bold;
+	  font-size: 15px;
+	  background-color: rgba(24, 60, 90, 0.43);
 }
-
-a {
-	display: inline-block;
-	-webkit-box-shadow: 0 0 5px 4px rgba(0, 255, 255, 0.61);
-	-moz-box-shadow: 0 0 5px 4px rgba(0, 255, 255, 0.61);
-	box-shadow: 0 0 5px 4px rgba(0, 255, 255, 0.61);
-	margin: 5px 10px;
+footer p{
+		margin-bottom: 10px;
+		font-size: 15px;
 }
-
-a:hover {
-	-webkit-box-shadow: 0 0 5px 4px rgba(255, 255, 255, 0.81);
-	-moz-box-shadow: 0 0 5px 4px rgba(255, 255, 255, 0.81);
-	box-shadow: 0 0 5px 4px rgba(255, 255, 255, 0.81);
-}
-
-.b1 {}
-
-.b2 {}
-
-.b3 {}
-
-.b4 {}
-
-.b5 {}
-
-.b6 {}
-
-footer {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	right: 0;
-
-	padding: 20px 15px;
-	margin: 0;
-
-	text-shadow: 0 0 7px rgba(0, 0, 0, 1);
-	background: rgba(0,0,0,0.7);
-
-	text-align: center;
-
-	font-size: 16px;
-	font-weight: bold;
-	color: white;
-}
-
-footer div {
-	padding: 0 0 20px 0;
-}
-
 footer img {
-	height: 50px;
+    height: 40px;
 }
+/* footer end */
