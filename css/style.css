@@ -94,9 +94,9 @@ nav img{
 
 /* youtube and form containers - start */
 iframe{
-	position:relative;
-	top:0;
-	background:url(../images/loading.svg) center center no-repeat;
+/* 	position:relative;
+	top:0; */
+	background:url(../images/loading.svg) 100px center no-repeat;
 	 background-size: 100px ;
 }
 .yt-cont{
