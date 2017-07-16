@@ -73,6 +73,9 @@ nav img{
 	nav img{
 			width: 100px;
 	}
+	body{
+		background-position: center 5px;
+	}
 }
 /* nav end */
 
