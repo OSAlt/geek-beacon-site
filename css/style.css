@@ -43,11 +43,10 @@ body{
 /* nav start */
 nav{
 	  text-align: center;
-	  padding: 220px 3% 20px 3%;
 }
 nav li{
     display: inline-block;
-		margin: 2%;
+		margin: 0.5%;
 }
 nav a{
 		display: inline-block;
@@ -56,7 +55,7 @@ nav a{
 		-moz-box-shadow: 0 0 5px 4px rgba(0, 255, 255, 0.61);
 }
 nav img{
-		width: 140px;
+		width: 145px;
 		height: auto;
 }
 
