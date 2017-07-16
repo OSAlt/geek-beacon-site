@@ -58,15 +58,15 @@ nav img{
 		width: 145px;
 		height: auto;
 }
-@media screen and (max-width: 1200px){
-	nav img{
-			width: 100px;
-	}
-}
 
-@media screen and (max-width: 1310px){
+@media screen and (max-width: 1310px) and (min-width: 1202px){
 	nav img{
 			width: 130px;
+	}
+}
+@media screen and (max-width: 1200px) and (min-width: 522px){
+	nav img{
+			width: 100px;
 	}
 }
 @media screen and (max-width: 520px){
