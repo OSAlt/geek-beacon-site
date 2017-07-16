@@ -19,7 +19,7 @@ body{
 }
 body{
     background-image: url(../images/background_improved.png);
-    background-position: center center;
+    background-position: 0 -40px;
     background-repeat:  no-repeat;
     background-attachment: fixed;
     background-size:  cover;
