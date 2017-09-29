@@ -24,7 +24,7 @@
         <!-- Forms -->
         <!-- ============================================================================== -->
         <br>
-        <form action="/content/edit/{{ content_id }}/" method="post">
+        <form action="/content/edit/{{ content_id }}/" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% for hidden in form.hidden_fields %}
               {{ hidden }}
@@ -126,7 +126,7 @@
                 </li>
                 <li class="nav-item">
                   {{ form.featured|add_class:'form-check form-check-inline' }}
-                  <label for="featured"><strong>Featured</strong></label>
+                  <label for="featured"><strong>Feature</strong></label>
                 </li>
 
               </ul>

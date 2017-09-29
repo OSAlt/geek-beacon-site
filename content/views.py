@@ -152,7 +152,7 @@ class AddMenuItem(UserPassesTestMixin, LoginRequiredMixin, View):
                                                                          "menu" : menu})
 
     def post(self, request, operation=None):
-        form = AddMenuItemForm(request.POST)
+        form = AddMenuItemForm(request.POST, request.FILES)
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
@@ -185,7 +185,7 @@ class AddContent(UserPassesTestMixin, LoginRequiredMixin, View):
                                                                          "menu" : menu})
 
     def post(self, request):
-        form = AddContentForm(request.POST)
+        form = AddContentForm(request.POST, request.FILES)
         # check whether it's valid:
         if form.is_valid():
 
@@ -195,6 +195,10 @@ class AddContent(UserPassesTestMixin, LoginRequiredMixin, View):
                 content = ContentItem()
             except Exception as e:
                 print(e)
+            print('hi')
+            print(form.cleaned_data['header_image'])
+            print(form.cleaned_data['thumbnail_image'])
+            print('hello')
             content.title = form.cleaned_data['title']
             content.author = form.cleaned_data['author']
             content.header_image = form.cleaned_data['header_image']
@@ -247,7 +251,7 @@ class EditMenuItem(UserPassesTestMixin, LoginRequiredMixin, View):
                                                                              "menu_item_id" : menu_item_id})
 
     def post(self, request, menu_item_id=None):
-        form = AddMenuItemForm(request.POST)
+        form = AddMenuItemForm(request.POST, request.FILES)
         # check whether it's valid:
         if form.is_valid():
 
@@ -311,7 +315,7 @@ class EditContent(UserPassesTestMixin, LoginRequiredMixin, View):
                                                                          "content_id" : content_id})
 
     def post(self, request, content_id=None):
-        form = AddContentForm(request.POST)
+        form = AddContentForm(request.POST, request.FILES)
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required

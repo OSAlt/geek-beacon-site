@@ -24,7 +24,7 @@
         <!-- Forms -->
         <!-- ============================================================================== -->
         <br>
-        <form action="/content/menu/add/" method="post">
+        <form action="/content/menu/add/" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% for hidden in form.hidden_fields %}
               {{ hidden }}
