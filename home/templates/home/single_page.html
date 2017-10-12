@@ -2,13 +2,32 @@
 {% load staticfiles %}
 {% load wagtailcore_tags %}
 
-
 {% block body_class %}single-page{% endblock %}
-{% block title  %}{{ page.title }} | {{% endblock title %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
-    <div class="content">
-        {{ page.body|richtext }}
+
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+    <div class="container">
+        <div class="row">
+
+            <!-- main start -->
+            <!-- ================ -->
+            <div class="main col-12">
+
+                <!-- page-title start -->
+                <!-- ================ -->
+                <h1 class="page-title">{{ page.title }}</h1>
+                <div class="separator-2"></div>
+                <div class="blogpage-content">
+                    {{ page.body|richtext }}
+                </div>
+            </div>
+            <!-- main end -->
+
+        </div>
     </div>
+</section>
+<!-- main-container end -->
 {% endblock %}

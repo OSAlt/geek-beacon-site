@@ -1,18 +1,74 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}single-content{% endblock %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
-    {% if page.subtitle %}
-        <h2 class="intro">{{ page.subtitle }}</h2>
-    {% endif %}
-    <p class="meta">{{ page.date }}</p>
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+    <div class="container">
+        <div class="row">
 
-    {{ page.body|richtext }}
+            <!-- main start -->
+            <!-- ================ -->
+            <div class="main col-lg-12"> {# TODO: Change this to 8 if we enable sidebar at some point #}
 
-    <p><a href="{{ page.get_parent.url }}">Return to Index</a></p>
+                <!-- page-title start -->
+                <!-- ================ -->
+                <h1 class="page-title">{{ page.title }}</h1>
+                <!-- page-title end -->
+
+                <!-- blogpost start -->
+                <!-- ================ -->
+                <article class="blogpost full">
+                    <header>
+                        <div class="post-info mb-4">
+                            <span class="post-date">
+                                <i class="icon-calendar"></i>
+                                <span class="day">{{ page.date|date:"d"}}</span>
+                                <span class="month">{{ page.date|date:"M Y"}}</span>
+                            </span>
+                            <span class="submitted"><i class="icon-user-1"></i> by <a
+                                    href="#">{{ page.owner.get_full_name }}</a></span>
+                            {# TODO: Change if we ever add comments #}
+                            {# <span class="comments"><i class="icon-chat"></i> <a href="#">22 comments</a></span> #}
+                        </div>
+                    </header>
+                    <div class="blogpost-content">
+                        <div class="blog-post-header-image">
+                            {% image page.header_image width-800 %}
+                        </div>
+                        {% if page.subtitle %}<h3 class="my-4">{{ page.subtitle }}</h3>{% endif %}
+                        <div class="post-content">
+                            {{ page.body|richtext }}
+                        </div>
+                    </div>
+                    <footer class="clearfix">
+                        <div class="tags pull-left"><i class="icon-tags"></i> <a href="#">tag 1</a>, <a href="#">tag
+                            2</a>, <a
+                                href="#">long tag 3</a>
+                        </div>
+                        <div class="link pull-right">
+                            <ul class="social-links circle small colored clearfix margin-clear text-right animated-effect-1">
+                                <li class="twitter"><a target="_blank" href="http://www.twitter.com"><i
+                                        class="fa fa-twitter"></i></a>
+                                </li>
+                                <li class="googleplus"><a target="_blank" href="http://plus.google.com"><i
+                                        class="fa fa-google-plus"></i></a></li>
+                                <li class="facebook"><a target="_blank" href="http://www.facebook.com"><i
+                                        class="fa fa-facebook"></i></a></li>
+                            </ul>
+                        </div>
+                    </footer>
+                </article>
+                <!-- blogpost end -->
+            </div>
+            <p><a href="{{ page.get_parent.url }}">Return to Index</a></p>
+        </div>
+    </div>
+</section>
+
 
 {% endblock %}
