@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  postgres:
+    image: geekbeacon/postgres
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    env_file: .env
+    volumes:
+      - ./volumes/postgres_data:/var/lib/postgresql/data
+      - ./volumes/postgres_backup:/backups
+    ports:
+      - "5432:5432"
