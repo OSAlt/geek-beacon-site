@@ -54,11 +54,14 @@ class BlogIndexPage(Page):
         blogposts = []
         if None != category and '' != category and 'None' != category:
             context['category'] = category
-            blogposts =self.get_children().filter(blogpost__categories__name=category)\
-            .order_by('-first_published_at')
+            blogposts = self.get_children() \
+                .filter(blogpost__categories__name=category)
         else:
             context['category'] = ''
-            blogposts =self.get_children().order_by('-first_published_at')
+            blogposts =self.get_children()
+
+        blogposts = blogposts.filter(content_type__model= 'blogpost').order_by('-first_published_at')
+
         paginator = Paginator(blogposts, 5) # Show 5 resources per page
         page = request.GET.get('page')
         try:
