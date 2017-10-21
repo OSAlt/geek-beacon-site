@@ -48,7 +48,17 @@ class BlogIndexPage(Page):
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
         context = super(BlogIndexPage, self).get_context(request)
-        blogposts = self.get_children().live().order_by('-first_published_at')
+
+        category = request.GET.get('category')
+
+        blogposts = []
+        if category is not None:
+            context['category'] = category
+            blogposts =self.get_children().filter(blogpost__categories__name=category)\
+            .order_by('-first_published_at')
+        else:
+            context['category'] = category
+            blogposts =self.get_children().order_by('-first_published_at')
         paginator = Paginator(blogposts, 5) # Show 5 resources per page
         page = request.GET.get('page')
         try:

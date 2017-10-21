@@ -71,7 +71,7 @@
                         <ul class="pagination justify-content-center">
                             {% if blogposts.has_previous %}
                                 <li class="page-item">
-                                    <a href="?page={{ blogposts.previous_page_number }}" class="page-link">
+                                    <a href="?page={{ blogposts.previous_page_number }}&category={{ category }}" class="page-link">
                                         <i aria-hidden="true" class="fa fa-angle-left"></i>
                                         <span class="sr-only">Previous</span>
                                     </a>
@@ -79,12 +79,12 @@
                             {% endif %}
                             {% for page_num in blogposts.paginator.page_range %}
                                 <li {% if page_num == blogposts.number %} class="page-item"{% endif %}>
-                                    <a href="?page={{ page_num }}" class="page-link">{{ page_num }}</a>
+                                    <a href="?page={{ page_num }}&category={{ category }}" class="page-link">{{ page_num }}</a>
                                 </li>
                             {% endfor %}
                             {% if blogposts.has_next %}
                                 <li class="page-item">
-                                                    <a class="page-link" href="?page={{ blogposts.next_page_number }}" aria-label="Next">
+                                                    <a class="page-link" href="?page={{ blogposts.next_page_number }}&category={{ category }}" aria-label="Next">
                                                         <i aria-hidden="true" class="fa fa-angle-right"></i>
                                                         <span class="sr-only">Next</span>
                                                     </a>
