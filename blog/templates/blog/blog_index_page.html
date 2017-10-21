@@ -5,22 +5,22 @@
 {% block body_class %}template-blogindexpage{% endblock %}
 
 {% block content %}
-<!-- main-container start -->
-<!-- ================ -->
-<section class="main-container">
+    <!-- main-container start -->
+    <!-- ================ -->
+    <section class="main-container">
 
-    <div class="container">
-        <div class="row">
+        <div class="container">
+            <div class="row">
 
-            <!-- main start -->
-            <!-- ================ -->
-            <div class="main col-12">
-
-                <!-- page-title start -->
+                <!-- main start -->
                 <!-- ================ -->
-                <h1 class="page-title">{{ page.title }}</h1>
-                <div class="separator-2"></div>
-                <!-- page-title end -->
+                <div class="main col-12">
+
+                    <!-- page-title start -->
+                    <!-- ================ -->
+                    <h1 class="page-title">{{ page.title }}</h1>
+                    <div class="separator-2"></div>
+                    <!-- page-title end -->
                     {% for post in blogposts %}{% with post=post.specific %}
                         <!-- blogpost start -->
                         <article class="blogpost">
@@ -37,10 +37,11 @@
                                         <div class="post-info">
                                             <span class="post-date">
                                                 <i class="icon-calendar"></i>
-                                                <span class="day">{{ post.date|date:"d"}}</span>
-                                                <span class="month">{{ post.date|date:"M Y"}}</span>
+                                                <span class="day">{{ post.date|date:"d" }}</span>
+                                                <span class="month">{{ post.date|date:"M Y" }}</span>
                                             </span>
-                                            <span class="submitted"><i class="icon-user-1"></i> by {{ post.owner.get_full_name }}</span>
+                                            <span class="submitted"><i
+                                                    class="icon-user-1"></i> by {{ post.owner.get_full_name }}</span>
                                             <!-- <span class="comments"><i class="icon-chat"></i> <a href="#">22 comments</a></span>-->
                                         </div>
                                     </header>
@@ -58,39 +59,45 @@
                                         {% endfor %}
                                     </div>
                                 {% endif %}
-                                <div class="link pull-right"><i class="icon-link"></i><a href="{% pageurl post %}">Read More</a></div>
+                                <div class="link pull-right"><i class="icon-link"></i><a href="{% pageurl post %}">Read
+                                    More</a></div>
                             </footer>
                         </article>
                         <!-- blogpost end -->
                     {% endwith %}{% endfor %}
-              <!-- pagination start
-              <nav aria-label="Page navigation">
-                <ul class="pagination justify-content-center">
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                      <i aria-hidden="true" class="fa fa-angle-left"></i>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                  </li>
-                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">4</a></li>
-                  <li class="page-item"><a class="page-link" href="#">5</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                      <i aria-hidden="true" class="fa fa-angle-right"></i>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-              pagination end -->
-            </div>
-            <!-- main end -->
 
-          </div>
+                    <!-- pagination start  -->
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            {% if blogposts.has_previous %}
+                                <li class="page-item">
+                                    <a href="?page={{ blogposts.previous_page_number }}" class="page-link">
+                                        <i aria-hidden="true" class="fa fa-angle-left"></i>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% for page_num in blogposts.paginator.page_range %}
+                                <li {% if page_num == blogposts.number %} class="page-item"{% endif %}>
+                                    <a href="?page={{ page_num }}" class="page-link">{{ page_num }}</a>
+                                </li>
+                            {% endfor %}
+                            {% if blogposts.has_next %}
+                                <li class="page-item">
+                                                    <a class="page-link" href="?page={{ blogposts.next_page_number }}" aria-label="Next">
+                                                        <i aria-hidden="true" class="fa fa-angle-right"></i>
+                                                        <span class="sr-only">Next</span>
+                                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    <!-- pagination end -->
+                </div>
+                <!-- main end -->
+
+            </div>
         </div>
-      </section>
-      <!-- main-container end -->
+    </section>
+    <!-- main-container end -->
 {% endblock %}

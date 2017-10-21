@@ -14,7 +14,7 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.models import register_snippet
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 @register_snippet
 class BlogCategory(models.Model):
@@ -49,7 +49,20 @@ class BlogIndexPage(Page):
         # Update context to include only published posts, ordered by reverse-chron
         context = super(BlogIndexPage, self).get_context(request)
         blogposts = self.get_children().live().order_by('-first_published_at')
-        context['blogposts'] = blogposts
+        paginator = Paginator(blogposts, 5) # Show 5 resources per page
+        page = request.GET.get('page')
+        try:
+            resources = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            resources = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            resources = paginator.page(paginator.num_pages)
+
+            # make the variable 'resources' available on the template
+        context['blogposts'] = resources
+
         return context
 
 
@@ -61,7 +74,7 @@ class BlogPost(Page):
     date = models.DateTimeField("Post date", default=datetime.now)
     subtitle = models.CharField(max_length=250, blank=True)
     header_image = models.ForeignKey('wagtailimages.Image',
-                                     on_delete=models.SET_NULL, related_name='+', blank=True, null=True,)
+                                     on_delete=models.SET_NULL, related_name='+', blank=True, null=True, )
 
     body = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=BlogPostTag, blank=True)
