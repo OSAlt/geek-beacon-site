@@ -2,6 +2,7 @@ version: '2'
 
 services:
   django: &django
+    image: geekbeacon/django
     build:
       context: .
       dockerfile: ./compose/local/django/Dockerfile

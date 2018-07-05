@@ -4,21 +4,27 @@ from django import forms
 from django.db import models
 
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
+
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
-from wagtail.core.models import Page
-from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+from wagtail.contrib.routable_page.models import RoutablePageMixin
+
+from wagtail.core.fields import RichTextField
+from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
+from wagtail.core.models import Page
+
+
 @register_snippet
 class BlogCategory(models.Model):
     name = models.CharField(max_length=150)
+    description = models.TextField(default='')
     slug = models.SlugField(default='')
     icon = models.ForeignKey(
         'wagtailimages.Image', null=True, blank=True,
@@ -28,6 +34,7 @@ class BlogCategory(models.Model):
     panels = [
         FieldPanel('name'),
         FieldPanel('slug'),
+        FieldPanel('description'),
         ImageChooserPanel('icon'),
     ]
 
@@ -37,8 +44,10 @@ class BlogCategory(models.Model):
     class Meta:
         verbose_name_plural = 'blog categories'
 
+class BlogPostTag(TaggedItemBase):
+    content_object = ParentalKey('BlogPost', related_name='tagged_items')
 
-class BlogIndexPage(Page):
+class BlogIndexPage(RoutablePageMixin, Page):
     header = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
@@ -54,15 +63,18 @@ class BlogIndexPage(Page):
         blogposts = []
         if None != category and '' != category and 'None' != category:
             context['category'] = category
+            categoryObj = BlogCategory.objects.get(name=category)
+            context['category_description'] = categoryObj.description
             blogposts = self.get_children() \
                 .filter(blogpost__categories__name=category)
         else:
-            context['category'] = ''
+            context['category'] = 'All News'
+            context['category_description'] = ''
             blogposts =self.get_children()
 
         blogposts = blogposts.filter(content_type__model= 'blogpost').order_by('-first_published_at')
 
-        paginator = Paginator(blogposts, 5) # Show 5 resources per page
+        paginator = Paginator(blogposts, 15) # Show 5 resources per page
         page = request.GET.get('page')
         try:
             resources = paginator.page(page)
@@ -74,16 +86,25 @@ class BlogIndexPage(Page):
             resources = paginator.page(paginator.num_pages)
 
             # make the variable 'resources' available on the template
-        context['blogposts'] = resources
+        paged_blogposts = []
+        items = []
+        count = 0
+        for item in resources:
+            items.append(item)
+            count+=1
+            if count % 3 == 0:
+                paged_blogposts.append(items)
+                items = []
+
+        if items not in paged_blogposts:
+            paged_blogposts.append(items)
+
+        context['blogposts'] = paged_blogposts
 
         return context
 
 
-class BlogPostTag(TaggedItemBase):
-    content_object = ParentalKey('BlogPost', related_name='tagged_items')
-
-
-class BlogPost(Page):
+class BlogPost(RoutablePageMixin, Page):
     date = models.DateTimeField("Post date", default=datetime.now)
     subtitle = models.CharField(max_length=250, blank=True)
     header_image = models.ForeignKey('wagtailimages.Image',
