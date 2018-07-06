@@ -5,3 +5,4 @@ django-environ>=0.4,<0.5
 django-extensions>=1.9,<2.1
 Werkzeug>=0.12,<0.13
 whitenoise==3.3.0
+django-wagtail-feeds==0.1.0

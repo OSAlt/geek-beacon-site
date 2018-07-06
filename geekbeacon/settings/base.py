@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     'wagtail.contrib.routable_page',
+    'wagtail.contrib.settings',
     'wagtail.embeds',
     'wagtail.sites',
     'wagtail.users',
@@ -64,6 +65,7 @@ INSTALLED_APPS = [
     'wagtail.search',
     'wagtail.admin',
     'wagtail.core',
+    'wagtail_feeds',
 
     'modelcluster',
     'taggit',
@@ -112,7 +114,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'geekbeacon.wsgi.application'
 
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['geekbeacon.org', '0.0.0.0',])
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['geekbeacon.org', '0.0.0.0', 'localhost'])
 
 
 
