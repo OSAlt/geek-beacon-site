@@ -5,7 +5,7 @@ Website, built on wagtail
 
 This website is a combination of wagtail and features cherry-picked out of the CookieCutter project: http://cookiecutter-django.readthedocs.io/en/latest/index.html.
 
-There are features that are just simply missing, others that are consciously omitted due to a vairety of reasons, we'll call them artistic differences. 
+There are features that are just simply missing, others that are consciously omitted due to a variety of reasons, we'll call them artistic differences. 
 
 See  [Doc Folder](doc/) for more details
 
