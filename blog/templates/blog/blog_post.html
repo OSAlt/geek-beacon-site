@@ -64,8 +64,19 @@
             </div>
             <p><a href="{{ page.get_parent.url }}">Return to Index</a></p>
         </div>
+        <div id='discourse-comments'></div>
     </div>
 </section>
 
+<script type="text/javascript">
+  DiscourseEmbed = { discourseUrl: 'https://discourse.geekbeacon.org/',
+                     discourseEmbedUrl: 'https://www.geekbeacon.org{{request.path}}' };
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+    d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+</script>
 
 {% endblock %}
