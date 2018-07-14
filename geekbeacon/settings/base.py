@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'wagtail.core',
     'wagtail_feeds',
 
+
     'modelcluster',
     'taggit',
  
