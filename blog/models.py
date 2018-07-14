@@ -13,12 +13,14 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.cache import cache
 
-from wagtail.contrib.routable_page.models import RoutablePageMixin
+from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
 from wagtail.core.models import Page
+import json
 
 
 @register_snippet
@@ -129,3 +131,22 @@ class BlogPost(RoutablePageMixin, Page):
         FieldPanel('body', classname="full"),
         ImageChooserPanel('header_image'),
     ]
+
+    @route(r'^$') # will override the default Page serving mechanism
+    def post_view(self, request):
+        tags = self.tags.all()
+        categories = self.categories.all()
+        discourse_topics = {'tags': {}, 'categories': {}}
+        for cat in categories:
+            cacheKey = cat.slug + '_category'
+            data = cache.get(cacheKey)
+            if data != None: 
+                discourse_topics['categories'][cat.slug] = data
+        for tag in tags:
+            cacheKey = tag.slug + '_tag'
+            data = cache.get(cacheKey)
+            if data != None: 
+                discourse_topics['tags'][tag.slug] = data
+        self.discourse_topics = discourse_topics
+        self.discourse_topics_json = json.dumps(discourse_topics)
+        return super().serve(request)

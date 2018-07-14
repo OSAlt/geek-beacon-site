@@ -8,6 +8,7 @@ services:
       dockerfile: ./compose/production/django/Dockerfile
     depends_on:
       - postgres
+      - rabbit
     env_file: .env
     command: /gunicorn.sh
 
@@ -32,3 +33,10 @@ services:
       - ./compose/production/nginx/config:/etc/nginx/conf.d
     depends_on:
       - django
+  memcached:
+    image: memcached:latest
+  rabbit:
+    image: rabbitmq:latest
+    environment:
+      - RABBITMQ_DEFAULT_USER = admin
+      - RABBITMQ_DEFAULT_PASS = mypass

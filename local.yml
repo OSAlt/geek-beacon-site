@@ -8,9 +8,13 @@ services:
       dockerfile: ./compose/local/django/Dockerfile
     depends_on:
       - postgres
+      - rabbit
     volumes:
       - .:/app
     environment:
+    # correct database url fills out all fields for database settings
+    # avoids problems with invalid DB settings running python manage.py tasks from shell
+      - DATABASE_URL=postgres://geek_beacon:geek_beacon@postgres/geek_beacon
       - POSTGRES_USER=geek_beacon
       - POSTGRES_PASSWORD=geek_beacon
       - USE_DOCKER=yes
@@ -30,3 +34,10 @@ services:
       - ./volumes/postgres_backup_local:/backups
     ports:
       - "5432:5432"
+  memcached:
+    image: memcached:latest
+  rabbit:
+    image: rabbitmq:latest
+    environment:
+      - RABBITMQ_DEFAULT_USER = admin
+      - RABBITMQ_DEFAULT_PASS = mypass

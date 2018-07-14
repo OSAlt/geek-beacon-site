@@ -13,7 +13,7 @@
 
             <!-- main start -->
             <!-- ================ -->
-            <div class="main col-lg-12"> {# TODO: Change this to 8 if we enable sidebar at some point #}
+            <div class="main col-lg-9"> {# TODO: Change this to 8 if we enable sidebar at some point #}
 
                 <!-- page-title start -->
                 <!-- ================ -->
@@ -62,11 +62,39 @@
                 </article>
                 <!-- blogpost end -->
             </div>
+            <div class="col-lg-3">
+                <h4>Continue the conversation on Discourse</h4>
+                {% for tag,topics in page.discourse_topics.tags.items %}
+                    {% for topic in topics|slice:":6" %}
+                        <div class="discourse-topic">
+                            <a href="https://forum.geekbeacon.org/t/{{ topic.slug }}/{{topic.id}}">{{ topic.title }}</a>
+                            <p><i>posts:</i> <b>{{ topic.posts_count }}</b> | <i>replies:</i> <b>{{ topic.reply_count }}</b>
+                            <br><i>last poster:</i> <b>{{ topic.last_poster_username }}</b></p>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for tag,topics in page.discourse_topics.categories.items %}
+                    {% for topic in topics|slice:":6" %}
+                        <div class="discourse-topic">
+                            <a href="https://forum.geekbeacon.org/t/{{ topic.slug }}/{{topic.id}}">{{ topic.title }}</a>
+                            <p><i>posts:</i> <b>{{ topic.posts_count }}</b> | <i>replies:</i> <b>{{ topic.reply_count }}</b>
+                            <br><i>last poster:</i> <b>{{ topic.last_poster_username }}</b></p>
+                        </div>
+                    {% endfor %}
+                {% endfor %}               
+            </div>
+            <div>
+
+            </div>
             <p><a href="{{ page.get_parent.url }}">Return to Index</a></p>
         </div>
         <div id='discourse-comments'></div>
     </div>
 </section>
+
+<script>
+    var discourse_topics = {{ page.discourse_topics_json|safe }}
+</script>
 
 <script type="text/javascript">
   DiscourseEmbed = { discourseUrl: 'https://discourse.geekbeacon.org/',

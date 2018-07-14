@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 from __future__ import absolute_import, unicode_literals
+from celery.schedules import crontab
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -56,6 +57,7 @@ INSTALLED_APPS = [
     'wagtail.contrib.redirects',
     'wagtail.contrib.routable_page',
     'wagtail.contrib.settings',
+    'wagtail.contrib.modeladmin',
     'wagtail.embeds',
     'wagtail.sites',
     'wagtail.users',
@@ -67,9 +69,10 @@ INSTALLED_APPS = [
     'wagtail.core',
     'wagtail_feeds',
 
+
     'modelcluster',
     'taggit',
-
+ 
     'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -125,6 +128,13 @@ DATABASES = {
     'default': env.db('DATABASE_URL', default='postgres:///geek_beacon'),
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': 'memcached:11211',
+    }
+} 
+
 DEBUG = env.bool('DJANGO_DEBUG', False)
 
 # Internationalization
@@ -174,3 +184,12 @@ WAGTAIL_SITE_NAME = "geekbeacon"
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://www.geekbeacon.org'
+
+# Other Celery settings
+CELERY_BEAT_SCHEDULE = {
+    'get-discourse-topics': {
+        'task': 'geekbeacon.tasks.getDiscourseTopics',
+        'schedule': crontab(minute='*/5', hour='*'),
+        # 'args': (*args)
+    }
+}
