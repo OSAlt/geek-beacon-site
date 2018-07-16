@@ -11,11 +11,11 @@ BlogPostTag = apps.get_model('blog', 'BlogPostTag')
 BlogCategory = apps.get_model('blog', 'BlogCategory')
 
 @shared_task
-def getDiscourseTopics():
-    getDiscTagTopics()
-    getDiscCategoryTopics()
+def get_discourse_topics():
+    get_discourse_tag_topics()
+    get_discourse_category_topics()
 # gets the top posts from discourse by tag
-def getDiscTagTopics():
+def get_discourse_tag_topics():
     tags = BlogPostTag.objects.distinct('tag')
 
     for t in tags:
@@ -30,7 +30,7 @@ def getDiscTagTopics():
             cacheKey = t.tag.slug + '_tag'
             cache.set(cacheKey, data['topic_list']['topics'], None)
 
-def getDiscCategoryTopics():
+def get_discourse_category_topics():
     blogCategories = BlogCategory.objects.all()
     categoriesRequest = requests.get('https://forum.geekbeacon.org/categories.json')
     discourseCategories = categoriesRequest.json()

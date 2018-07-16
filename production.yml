@@ -37,6 +37,19 @@ services:
     image: memcached:latest
   rabbit:
     image: rabbitmq:latest
-    environment:
-      - RABBITMQ_DEFAULT_USER = admin
-      - RABBITMQ_DEFAULT_PASS = mypass
+    env_file: .env
+  celeryworker:
+    <<: *django
+    depends_on:
+      - redis
+      - postgres
+    ports: []
+    command: /start-celeryworker.sh
+  celerybeat:
+    # https://github.com/docker/compose/issues/3220
+    <<: *django
+    depends_on:
+      - redis
+      - postgres
+    ports: []
+    command: /start-celerybeat.sh

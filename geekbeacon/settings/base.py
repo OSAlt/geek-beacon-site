@@ -188,7 +188,7 @@ BASE_URL = 'http://www.geekbeacon.org'
 # Other Celery settings
 CELERY_BEAT_SCHEDULE = {
     'get-discourse-topics': {
-        'task': 'geekbeacon.tasks.getDiscourseTopics',
+        'task': 'geekbeacon.tasks.get_discourse_topics',
         'schedule': crontab(minute='*/5', hour='*'),
         # 'args': (*args)
     }
