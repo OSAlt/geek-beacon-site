@@ -41,7 +41,7 @@ services:
   celeryworker:
     <<: *django
     depends_on:
-      - redis
+      - rabbit
       - postgres
     ports: []
     command: /start-celeryworker.sh
@@ -49,7 +49,7 @@ services:
     # https://github.com/docker/compose/issues/3220
     <<: *django
     depends_on:
-      - redis
+      - rabbit
       - postgres
     ports: []
     command: /start-celerybeat.sh
