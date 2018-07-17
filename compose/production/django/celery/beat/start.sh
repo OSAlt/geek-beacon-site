@@ -5,4 +5,5 @@ set -o pipefail
 set -o nounset
 
 
+rm -f './celerybeat.pid'
 celery -A geekbeacon beat -l INFO
