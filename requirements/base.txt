@@ -11,4 +11,3 @@ wagtail-condensedinlinepanel==0.5.0
 celery
 amqp
 python-memcached
-
