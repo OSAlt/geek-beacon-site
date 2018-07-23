@@ -2,10 +2,32 @@
 
 {% load wagtailcore_tags wagtailimages_tags %}
 
+{% load static custom_tags %}
+
 {% block body_class %}single-content{% endblock %}
 
 {% block content %}
+<section class="youplay-banner banner-top youplay-banner-parallax small">
+    
+    <div class="image" data-speed="0.4" style="z-index: 0;">
+        
+    <div id="jarallax-container-0" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: -100;"><img src="{% static 'images/background_improved.png' %}" alt="" class="jarallax-img" style="object-fit: cover; object-position: 50% 50%; max-width: none; position: fixed; top: 0px; left: 277.094px; width: 1399.81px; height: 980.4px; overflow: hidden; pointer-events: none; margin-top: 176.8px; transform: translate3d(0px, -176.763px, 0px);"></div></div>
 
+
+<div class="info" style="opacity: 1; transform: translate3d(0px, 0px, 0px);">
+    <div>
+        <div class="container">
+            
+            
+                <h1 class="h1">Blog</h1>
+            
+            
+            
+        </div>
+    </div>
+</div>
+</section>
+    
       <section class="main-container">
         <div class="container">
           <div class="row">
@@ -21,73 +43,30 @@
               <div class="separator with-icon"><i class="fa fa-pencil bordered"></i></div>
 
 
-                <div class="masonry-grid row">
+                <div class="row vertical-gutter multi-columns-row">
                  {% for post_page in blogposts %}
 
                      {% for post  in post_page %}{% with post=post.specific %}
-                <div class="masonry-grid-item col-md-6 col-lg-4">
-                  <article class="blogpost shadow-2 light-gray-bg bordered">
-                    <div id="carousel-blog-post" class="carousel slide" data-ride="carousel">
-                      <!-- Indicators -->
-                      <ol class="carousel-indicators bottom margin-clear">
-                        <li data-target="#carousel-blog-post" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-blog-post" data-slide-to="1"></li>
-                        <li data-target="#carousel-blog-post" data-slide-to="2"></li>
-                      </ol>
-
-                      <!-- Wrapper for slides -->
-                      <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active">
-                          <div class="overlay-container">
-{#                            <img src="images/blog-1.jpg" alt="">#}
-                              {% image post.header_image width-551 %}
-                            <a class="overlay-link" href="{% pageurl post %}"><i class="fa fa-link"></i></a>
-                          </div>
-                        </div>
-                        <div class="carousel-item">
-                          <div class="overlay-container">
-                              {% image post.header_image width-551 %}
-                            <a class="overlay-link" href="{% pageurl post %}"><i class="fa fa-link"></i></a>
-                          </div>
-                        </div>
-                        <div class="carousel-item">
-                          <div class="overlay-container">
-                              {% image post.header_image width-551 %}
-                            <a class="overlay-link" href="{% pageurl post %}"><i class="fa fa-link"></i></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <header>
-                      <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
-                      <div class="post-info">
-                        <span class="post-date">
-                          <i class="fa fa-calendar-o pr-1"></i>
-                            <span class="day">{{ post.date|date:"d" }}</span>
-                            <span class="month">{{ post.date|date:"M Y" }}</span>
-                        </span>
-                                            <span class="submitted"><i
-                                                    class="icon-user-1"></i> by {{ post.owner }}</span>
-{#                        <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">22 comments</a></span>#}
-                      </div>
-                    </header>
-                    <div class="blogpost-content">
-                        {{ post.body|slice:"0:100"|richtext }}
-                    </div>
-                            <footer class="clearfix">
-                                {% if post.specific.tags.all.count %}
-                                    <div class="tags pull-left">
-                                        <i class="icon-tags"></i>
-                                        {% for tag in post.tags.all %}
-                                            <a href="{% slugurl 'tags' %}?tag={{ tag }}">{{ tag }}</a>
-                                        {% endfor %}
+                      <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="news-one">
+                            <a href="{% pageurl post %}" class="angled-img">
+                                <div class="img">
+                                    {% image post.header_image width-551 %}
+                                </div>
+                                <div class="bottom-info align-center">
+                                    <h3>{{ post.title }}</h3>
+                                    <span class="date">
+                                      <i class="fa fa-calendar"></i>
+                                      <span class="day">{{ post.date|date:"d" }}</span>
+                                      <span class="month">{{ post.date|date:"M Y" }}</span>
+                                    </span>
+                                    <div class="description">
+                                        {{ post.body|slice:"0:100"|richtext }}
                                     </div>
-                                {% endif %}
-{#                                <div class="link pull-right"><i class="icon-link"></i><a href="{% pageurl post %}">Read More</a></div>#}
-                            </footer>
-                  </article>
-                  <!-- blogpost end -->
-                </div>
+                                </div>
+                            </a>
+                        </div>
+                      </div>
                      {% endwith %}{% endfor %}
                 {% endfor %}
 
