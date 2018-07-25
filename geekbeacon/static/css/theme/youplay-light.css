@@ -233,7 +233,7 @@ img {
  */
 .date {
     margin-top: 8px;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     color: rgba(60, 7, 50, 0.65);
 }
 
@@ -3607,6 +3607,10 @@ fieldset[disabled] .btn {
         -ms-transform-origin: 50% 50%;
             transform-origin: 50% 50%;
     -webkit-backface-visibility: hidden;
+    height: 196px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
 }
 
 .angled-img .img > img {
@@ -4242,6 +4246,7 @@ textarea {
 }
 
 .navbar-youplay {
+    margin-top: 47px;
     min-height: 50px;
     background: rgba(255, 255, 255, 0.4);
     border: none;
@@ -4507,6 +4512,7 @@ textarea {
 .navbar-youplay.navbar-small {
     background: #fff;
     background: rgba(255, 255, 255, 0.94);
+    margin-top: 0;
 }
 
 .navbar-youplay.navbar-small .navbar-brand {

@@ -31,7 +31,11 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
 
         <!-- Bootstrap core CSS -->
-        <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+        <!-- <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet"> -->
+
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrapv3.min.css' %}" />
 
         <!-- Font Awesome CSS -->
         <link href="{% static 'fonts/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
@@ -39,6 +43,9 @@
         <!-- Fontello CSS -->
         <link href="{% static 'fonts/fontello/css/fontello.css' %}" rel="stylesheet">
 
+        <!-- Social Likes -->
+        <link rel="stylesheet" href="{% static 'vendor/social-likes/dist/social-likes_flat.css' %}" />
+        
         <!-- Plugins -->
         <link href="{% static 'plugins/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
         <link href="{% static 'plugins/rs-plugin-5/css/settings.css' %}" rel="stylesheet">
@@ -59,7 +66,7 @@
         <!-- Used font for body: Roboto -->
         <!-- Used font for headings: Raleway -->
         <!-- Use css/rtl_typography-default.css for RTL version -->
-        <link href="{% static 'css/typography-default.css' %}" rel="stylesheet">
+        <!-- <link href="{% static 'css/typography-default.css' %}" rel="stylesheet"> -->
         <!-- Color Scheme (In order to change the color scheme, replace the blue.css with the color scheme that you prefer)-->
         <link href="{% static 'css/skins/light_blue.css' %}" rel="stylesheet">
 
@@ -77,8 +84,15 @@
         {% wagtailuserbar %}
         <!-- Scroll to top icon -->
         <div class="scrollToTop circle"><i class="icon-up-open-big"></i></div>
-
-        <div class="page-wrapper"> <!-- Main page container -->
+        
+        <!-- Preloader -->
+        <!-- <div class="page-preloader preloader-wrapp"> -->
+                <!-- <img src="{{ preloader_logo }}" alt=""> -->
+            <!-- <div class="preloader"></div> -->
+        <!-- </div> -->
+        <!-- /Preloader -->
+    
+        <div class="content-wrap page-wrapper"> <!-- Main page container -->
 
             {% include 'header.html' %}
             {% block content %}{% endblock %}
@@ -91,34 +105,36 @@
         <!-- ================================================== -->
         <!-- Jquery and Bootstap core js files -->
         <script type="text/javascript" src="{% static 'plugins/jquery.min.js' %}"></script>
+
+        <!-- FontAwesome -->
+        <!-- <script defer src="{% static '/vendor/font-awesome/svg-with-js/js/fontawesome-all.min.js' %}"></script>
+        <script defer src="{% static '/vendor/font-awesome/svg-with-js/js/fa-v4-shims.min.js' %}"></script> -->
+
         <script type="text/javascript" src="{% static 'plugins/tether.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'vendor/bootstrap/dist/js/bootstrap.min.js' %}"></script>
         <!-- Modernizr javascript -->
         <script type="text/javascript" src="{% static 'plugins/modernizr.js' %}"></script>
         <!-- jQuery Revolution Slider  -->
         <script type="text/javascript" src="{% static 'plugins/rs-plugin-5/js/jquery.themepunch.tools.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'plugins/rs-plugin-5/js/jquery.themepunch.revolution.min.js' %}"></script>
         <!-- Isotope javascript -->
-        <script type="text/javascript" src="{% static 'plugins/isotope/isotope.pkgd.min.js' %}"></script>
+        <!-- <script type="text/javascript" src="{% static 'plugins/isotope/isotope.pkgd.min.js' %}"></script> -->
         <!-- Magnific Popup javascript -->
-        <script type="text/javascript" src="{% static 'plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+        <!-- <script type="text/javascript" src="{% static 'plugins/magnific-popup/jquery.magnific-popup.min.js' %}"></script> -->
         <!-- Appear javascript -->
-        <script type="text/javascript" src="{% static 'plugins/waypoints/jquery.waypoints.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'plugins/waypoints/sticky.min.js' %}"></script>
+        <!-- <script type="text/javascript" src="{% static 'plugins/waypoints/jquery.waypoints.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'plugins/waypoints/sticky.min.js' %}"></script> -->
         <!-- Count To javascript -->
-        <script type="text/javascript" src="{% static 'plugins/jquery.countTo.js' %}"></script>
-        <!-- Parallax javascript -->
-        <script src="{% static 'plugins/jquery.parallax-1.1.3.js' %}"></script>
-        <!-- Contact form -->
-        <script src="{% static 'plugins/jquery.validate.js' %}"></script>
+        <!-- <script type="text/javascript" src="{% static 'plugins/jquery.countTo.js' %}"></script> -->
+
         <!-- Morphext -->
-        <script type="text/javascript" src="{% static 'plugins/morphext/morphext.min.js' %}"></script>
+        <!-- <script type="text/javascript" src="{% static 'plugins/morphext/morphext.min.js' %}"></script> -->
         <!-- Owl carousel javascript -->
-        <script type="text/javascript" src="{% static 'plugins/owlcarousel2/owl.carousel.min.js' %}"></script>
+        <!-- <script type="text/javascript" src="{% static 'plugins/owlcarousel2/owl.carousel.min.js' %}"></script> -->
         <!-- Initialization of Plugins -->
-        <script type="text/javascript" src="{% static 'js/template.js' %}"></script>
+        <!-- <script type="text/javascript" src="{% static 'js/template.js' %}"></script> -->
         <!-- Custom Scripts -->
-        <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+        <!-- <script type="text/javascript" src="{% static 'js/custom.js' %}"></script> -->
 
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}

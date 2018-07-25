@@ -19,7 +19,7 @@
         <div class="container">
             
             
-                <h1 class="h1">Blog</h1>
+                <h1 class="h1">{{ category }}</h1>
             
             
             
@@ -29,7 +29,7 @@
 </section>
     
       <section class="main-container">
-        <div class="container">
+        <div class="container youplay-news news-grid">
           <div class="row">
 
             <!-- main start -->
@@ -38,9 +38,7 @@
 
               <!-- page-title start -->
               <!-- ================ -->
-              <h1 class="page-title text-center">{{ category }}</h1>
-              <p class="text-center">{{ category_description }}</p>
-              <div class="separator with-icon"><i class="fa fa-pencil bordered"></i></div>
+              
 
 
                 <div class="row vertical-gutter multi-columns-row">
@@ -50,9 +48,8 @@
                       <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="news-one">
                             <a href="{% pageurl post %}" class="angled-img">
-                                <div class="img">
-                                    {% image post.header_image width-551 %}
-                                </div>
+                                {% image post.header_image original as cover_photo %}
+                                <div class="img" style="background-image: url('{{ cover_photo.url }}')"></div>
                                 <div class="bottom-info align-center">
                                     <h3>{{ post.title }}</h3>
                                     <span class="date">

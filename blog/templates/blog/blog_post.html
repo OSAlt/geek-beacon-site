@@ -2,13 +2,38 @@
 
 {% load wagtailcore_tags wagtailimages_tags %}
 
+{% load static custom_tags %}
+
 {% block body_class %}single-content{% endblock %}
 
 {% block content %}
+<section class="youplay-banner banner-top youplay-banner-parallax small">
+    
+        <div class="image" data-speed="0.4" style="z-index: 0;">
+            <div id="jarallax-container-0" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: -100;">
+                {% image page.header_image original as cover_photo %}
+                <img src="{{ cover_photo.url }}" alt="" class="jarallax-img" style="object-fit: cover; object-position: 50% 50%; max-width: none; position: fixed; top: 0px; left: 277.094px; width: 1399.81px; height: 980.4px; overflow: hidden; pointer-events: none; margin-top: 176.8px; transform: translate3d(0px, -176.763px, 0px);">
+            </div>
+        </div>
+    
+    
+    <div class="info" style="opacity: 1; transform: translate3d(0px, 0px, 0px);">
+        <div>
+            <div class="container">
+                
+                
+                    <h1 class="h1">{{ category }}</h1>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</section>
 <!-- main-container start -->
 <!-- ================ -->
 <section class="main-container">
-    <div class="container">
+    <div class="container youplay-news youplay-post">
         <div class="row">
 
             <!-- main start -->
@@ -22,47 +47,99 @@
 
                 <!-- blogpost start -->
                 <!-- ================ -->
-                <article class="blogpost full">
-                    <header>
-                        <div class="post-info mb-4">
-                            <span class="post-date">
-                                <i class="icon-calendar"></i>
-                                <span class="day">{{ page.date|date:"d"}}</span>
-                                <span class="month">{{ page.date|date:"M Y"}}</span>
-                            </span>
-                            <span class="submitted"><i class="icon-user-1"></i> by <a
-                                    href="#">{{ page.owner.get_full_name }}</a></span>
-                            {# TODO: Change if we ever add comments #}
-                            {# <span class="comments"><i class="icon-chat"></i> <a href="#">22 comments</a></span> #}
+                <article class="news-one">
+                                    <!-- Post Text -->
+                    <div class="description">
+                        <!-- <a href="https://www.youtube.com/watch?v=1nKW9kTjsps" class="angled-img pull-left video-popup">
+                            <div class="img">
+                                <img src="assets/images/dark/game-bloodborne-500x375.jpg" alt="">
+                            </div>
+                            <i class="fa fa-play icon"></i>
+                        </a> -->
+                        <a href="{{ cover_photo.url }}" class="angled-img pull-left video-popup">
+                            <div class="img">
+                                <img src="{{ cover_photo.url }}" alt="">
+                            </div>
+                            <i class="fa fa-search-plus icon"></i>
+                        </a>
+                        {{ page.body|richtext }}
+                    </div>
+                    <!-- /Post Text -->
+
+                    {% if page.tags.count > 0 %}
+                    <!-- Post Tags -->
+                    <div class="tags">
+                        <i class="fa fa-tags"></i>
+                        {% for tag in page.tags.all %}
+                            <a href="#">{{ tag }}</a>{% if not forloop.last %}<span>,</span>{% endif %}
+                        {% endfor %}
+                    </div>
+                    <!-- /Post Tags -->
+                    {% endif %}
+    
+                    <!-- Post Meta -->
+                    <div class="meta">
+                        <div class="item">
+                            <i class="fa fa-bookmark meta-icon"></i>
+                            Categories 
+                            {% for category in page.categories.all %}
+                                <a href="#">{{ category }}</a>{% if not forloop.last %}<span>,</span>{% endif %}
+                            {% endfor %}
+                            {% if page.categories.count == 0 %}
+                                <a href="#">Uncategorized</a>
+                            {% endif %}
                         </div>
-                    </header>
-                    <div class="blogpost-content">
-                        <div class="blog-post-header-image">
-                            {% image page.header_image width-800 %}
+                        <br>
+                        <div class="item">
+                            <i class="fa fa-user meta-icon"></i>
+                            Author <a href="#">{{ page.owner.get_full_name }}</a>
                         </div>
-                        {% if page.subtitle %}<h3 class="my-4">{{ page.subtitle }}</h3>{% endif %}
-                        <div class="post-content">
-                            {{ page.body|richtext }}
+                        <div class="item">
+                            <i class="fa fa-calendar meta-icon"></i>
+                            Published <a href="#"><span class="day">{{ page.date|date:"d"}}</span>
+                                <span class="month">{{ page.date|date:"M Y"}}</span></a>
+                        </div>
+                         <div class="item">
+                            <i class="fa fa-eye meta-icon"></i>
+                            Views 384
+                        </div>
+                        <div class="item">
+                            <a href="#"><i class="fa fa-heart"></i> 27</a>
                         </div>
                     </div>
-                    <footer class="clearfix">
-{#                        <div class="tags pull-left"><i class="icon-tags"></i> <a href="#">tag 1</a>, <a href="#">tag 2</a>, <a href="#">long tag 3</a> </div>#}
-                        <div class="link pull-right">
-                            <ul class="social-links circle small colored clearfix margin-clear text-right animated-effect-1">
-                                <li class="twitter"><a target="_blank" href="http://www.twitter.com"><i
-                                        class="fa fa-twitter"></i></a>
-                                </li>
-                                <li class="googleplus"><a target="_blank" href="http://plus.google.com"><i
-                                        class="fa fa-google-plus"></i></a></li>
-                                <li class="facebook"><a target="_blank" href="http://www.facebook.com"><i
-                                        class="fa fa-facebook"></i></a></li>
-                            </ul>
-                        </div>
-                    </footer>
+
+                    <!-- Post Share -->
+                    <div class="btn-group social-list social-likes" data-counters="no">
+                        <span class="btn btn-default facebook" title="Share link on Facebook"></span>
+                        <span class="btn btn-default twitter" title="Share link on Twitter"></span>
+                        <span class="btn btn-default plusone" title="Share link on Google+"></span>
+                        <span class="btn btn-default pinterest" title="Share image on Pinterest" data-media=""></span>
+                        <span class="btn btn-default vkontakte" title="Share link on VK"></span>
+                    </div>
+                <!-- /Post Share -->
                 </article>
                 <!-- blogpost end -->
             </div>
             <div class="col-lg-3">
+                <!-- Side Search -->
+                <div class="side-block">
+                    <p>Search by News:</p>
+                    <form action="light-search.html">
+                        <div class="youplay-input">
+                            <input type="text" name="search" placeholder="enter search term">
+                        </div>
+                    </form>
+                </div>
+                <!-- Side Categories -->
+                <div class="side-block">
+                    <h4 class="block-title">Categories</h4>
+                    <ul class="block-content">
+                        <li><a href="/news">All</a></li>
+                        {% for category in page.categories.all %}
+                            <li><a href="/news?category={{ category }}">{{ category }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
                 <h4>Continue the conversation on Discourse</h4>
                 {% for tag,topics in page.discourse_topics.tags.items %}
                     {% for topic in topics|slice:":6" %}

@@ -1,6 +1,7 @@
 {% load static wagtailcore_tags custom_tags wagtailimages_tags %}
 
-<ul class="dropdown-menu">
+<div class="dropdown-menu">
+    <ul role="menu">
     {# Include link to parent because the parent link is a drop down TODO: Discuss this. I think this is silly. #}
     {# <li><a href="{% pageurl parent %}">{{ parent.specific.title }}</a></li> #}
     {% for child in menuitems_children %}
@@ -12,4 +13,5 @@
             {% endif %}
         </a></li>
     {% endfor %}
-</ul>
+    </ul>
+</div>

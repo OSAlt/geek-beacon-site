@@ -1,9 +1,12 @@
 {% load static wagtailcore_tags custom_tags wagtailimages_tags %}
-<ul class="navbar-nav ml-xl-auto">
+<ul class="nav navbar-nav">
     {% for menuitem in menuitems %}
-        <li class="{% if menuitem.show_dropdown %}dropdown{% endif %}{% if calling_page.url == menuitem.url %} active{% endif %}">
+        <li class="{% if menuitem.show_dropdown %}dropdown dropdown-hover{% endif %}{% if calling_page.url == menuitem.url %} active{% endif %}">
             {% if menuitem.show_dropdown %}
-                <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">{{ menuitem.specific.title }} <b class="caret"></b></a>
+                <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#" role="button">{{ menuitem.specific.title }}
+                    <span class="caret"></span>
+                    <span class="label">games</span>
+                </a>
                 {% top_menu_children parent=menuitem %}
             {% else %}
                 <a class="nav-link" aria-haspopup="false" aria-expanded="false" href="{% if menuitem.specific.external_link %}{{ menuitem.specific.external_link }}{% else %}{% pageurl menuitem %}{% endif %}">

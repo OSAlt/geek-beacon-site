@@ -1,4 +1,5 @@
 {% load static custom_tags %}
+
 <!-- header-container start -->
 <div class="header-container">
     <!-- header-top start -->
@@ -83,6 +84,29 @@
     </div>
     <!-- header-top end -->
 
+    <nav class="navbar-youplay navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="off-canvas" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">
+                        <img src="{% static 'images/mini_gb.png' %}" alt="Geek Beacon">
+                    </a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    {% block menu %}
+                        {% get_site_root as site_root %}
+                        {% top_menu parent=site_root calling_page=self %}
+                    {% endblock %}
+                </div>
+            </div>
+        </nav>
+
+
     <!-- header start -->
     <!-- classes:  -->
     <!-- "fixed": enables fixed navigation mode (sticky menu) e.g. class="header fixed clearfix" -->
@@ -91,77 +115,6 @@
     <!-- "dark": dark version of header e.g. class="header dark clearfix" -->
     <!-- "centered": mandatory class for the centered logo layout -->
     <!-- ================ -->
-    <header class="header fixed fixed-desktop clearfix">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-auto hidden-md-down pl-3">
-                    <!-- header-first start -->
-                    <!-- ================ -->
-                    <div class="header-first clearfix">
-
-                        <!-- logo -->
-                        <div id="logo" class="logo">
-                            <a href="/"><img id="logo_img" src="{% static 'images/mini_gb.png' %}"
-                                             style="padding-top:10px;" alt="Geek Beacon"></a>
-                        </div>
-
-
-                    </div>
-                    <!-- header-first end -->
-
-                </div>
-                <div class="col-lg-8 col-xl-10">
-
-                    <!-- header-second start -->
-                    <!-- ================ -->
-                    <div class="header-second clearfix">
-
-                        <!-- main-navigation start -->
-                        <!-- classes: -->
-                        <!-- "onclick": Makes the dropdowns open on click, this the default bootstrap behavior e.g. class="main-navigation onclick" -->
-                        <!-- "animated": Enables animations on dropdowns opening e.g. class="main-navigation animated" -->
-                        <!-- ================ -->
-                        <div class="main-navigation  animated">
-                            <nav class="navbar navbar-toggleable-md navbar-light p-0">
-
-                                <button class="navbar-toggler navbar-toggler-right" type="button"
-                                        data-toggle="collapse" data-target="#navbar-collapse-1"
-                                        aria-controls="navbar-collapse-1" aria-expanded="false"
-                                        aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>
-                                <div class="navbar-brand clearfix hidden-lg-up">
-
-                                    <!-- logo -->
-                                    <div id="logo-mobile" class="logo">
-                                        <a href="index.html"><img id="logo-img-mobile"
-                                                                  src="{% static 'images/mini_gb.png' %}"
-                                                                  alt="Geel Beacon"></a>
-                                    </div>
-
-                                </div>
-
-                                <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                                    <!-- main-menu -->
-                                    {% block menu %}
-                                        {% get_site_root as site_root %}
-                                        {% top_menu parent=site_root calling_page=self %}
-                                    {% endblock %}
-                                    <!-- main-menu end -->
-                                </div>
-
-                            </nav>
-                        </div>
-                        <!-- main-navigation end -->
-                    </div>
-                    <!-- header-second end -->
-
-                </div>
-{#                    <div class="d-flex flex-row">#}
-                <div class="col-auto ml-auto pr-3 hidden-md-down"> </div>
-            </div>
-        </div>
-    </header>
     <!-- header end -->
 </div>
 <!-- header-container end -->
