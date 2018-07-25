@@ -2563,6 +2563,10 @@ img.rounded {
     margin-left: 0;
 }
 
+.front-page .btn::before {
+    border: 0;
+}
+
 .btn::before {
     content: "";
     position: absolute;
@@ -4561,6 +4565,7 @@ textarea {
     -webkit-transition: .2s margin-top ease;
     -o-transition: .2s margin-top ease;
     transition: .2s margin-top ease;
+    z-index: 2;
 }
 
 .navbar-youplay.navbar-small .navbar-toggle {
@@ -4594,7 +4599,6 @@ textarea {
         position: relative;
         background: #fff;
         background: rgba(255, 255, 255, 0.4);
-        z-index: 1;
     }
     .navbar-youplay.navbar-small .navbar-header {
         background: #fff;
@@ -4939,7 +4943,7 @@ footer .image {
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: cover;
-    opacity: 0.5;
+    opacity: 0.75;
 }
 
 .youplay-banner .image img,
@@ -7331,7 +7335,7 @@ footer .social {
     overflow: hidden;
     text-align: center;
     background: #fff;
-    background: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 footer .social .container {

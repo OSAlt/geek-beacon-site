@@ -503,6 +503,10 @@ tbody {
   background: none;
 }
 
+.home-top.light-gray-bg {
+  margin-top: 79px;
+}
+
 .white-bg {
   background-color: #ffffff;
 }
