@@ -3,15 +3,13 @@ from datetime import datetime
 from django import forms
 from django.db import models
 
-from modelcluster.fields import ParentalKey, ParentalManyToManyField
+from modelcluster.fields import ParentalManyToManyField
 
 from modelcluster.contrib.taggit import ClusterTaggableManager
-from taggit.models import TaggedItemBase
 
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 from wagtail.search import index
-from wagtail.snippets.models import register_snippet
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.cache import cache
 
@@ -22,32 +20,8 @@ from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
 from wagtail.core.models import Page
 import json
 
+from blog.models.blog_tags import BlogPostTag
 
-@register_snippet
-class BlogCategory(models.Model):
-    name = models.CharField(max_length=150)
-    description = models.TextField(default='')
-    slug = models.SlugField(default='')
-    icon = models.ForeignKey(
-        'wagtailimages.Image', null=True, blank=True,
-        on_delete=models.SET_NULL, related_name='+'
-    )
-
-    panels = [
-        FieldPanel('name'),
-        FieldPanel('slug'),
-        FieldPanel('description'),
-        ImageChooserPanel('icon'),
-    ]
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name_plural = 'blog categories'
-
-class BlogPostTag(TaggedItemBase):
-    content_object = ParentalKey('BlogPost', related_name='tagged_items')
 
 class BlogIndexPage(RoutablePageMixin, Page):
     header = RichTextField(blank=True)
@@ -140,12 +114,12 @@ class BlogPost(RoutablePageMixin, Page):
         for cat in categories:
             cacheKey = cat.slug + '_category'
             data = cache.get(cacheKey)
-            if data != None: 
+            if data != None:
                 discourse_topics['categories'][cat.slug] = data
         for tag in tags:
             cacheKey = tag.slug + '_tag'
             data = cache.get(cacheKey)
-            if data != None: 
+            if data != None:
                 discourse_topics['tags'][tag.slug] = data
         self.discourse_topics = discourse_topics
         self.discourse_topics_json = json.dumps(discourse_topics)

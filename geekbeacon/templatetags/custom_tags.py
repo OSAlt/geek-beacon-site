@@ -1,6 +1,7 @@
 from django import template
 
-from blog.models import BlogCategory, BlogPost
+from blog.models.blog_pages import BlogPost
+from blog.admin import BlogCategory
 
 register = template.Library()
 

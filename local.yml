@@ -10,7 +10,7 @@ services:
      - "80:80"
      - "443:443"
   django: &django
-    image: geekbeacon/django
+    image: geekbeacon/django:local
     build:
       context: .
       dockerfile: ./compose/local/django/Dockerfile
@@ -28,7 +28,7 @@ services:
       - USE_DOCKER=yes
     command: /start.sh
   postgres:
-    image: geekbeacon/postgres
+    image: geekbeacon/postgres:local
     build:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
