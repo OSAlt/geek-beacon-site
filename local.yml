@@ -1,6 +1,14 @@
 version: '2'
 
 services:
+  nginx:
+    image: nginx
+    volumes:
+     - ./compose/local/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+     - ./compose/local/ssl:/home/certs
+    ports:
+     - "80:80"
+     - "443:443"
   django: &django
     image: geekbeacon/django
     build:
@@ -18,8 +26,6 @@ services:
       - POSTGRES_USER=geek_beacon
       - POSTGRES_PASSWORD=geek_beacon
       - USE_DOCKER=yes
-    ports:
-      - "8000:8000"
     command: /start.sh
   postgres:
     image: geekbeacon/postgres
