@@ -1,0 +1,16 @@
+name: Docker Image CI
+
+on: [push]
+
+jobs:
+
+  build:
+ 
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - uses: actions/checkout@v1
+    - name: create symlink
+      run: ln -s production.yml docker-compose.yml
+    - name: Build the Docker image
+      run: docker-compose build 
