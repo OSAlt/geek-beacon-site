@@ -1,4 +1,4 @@
-Django==2.2
+Django==2.2.8
 psycopg2-binary>=2.7,<2.8
 wagtail>=2.5.1,<=2.5.9
 django-environ>=0.4,<0.5
