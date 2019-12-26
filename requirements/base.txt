@@ -1,6 +1,6 @@
-Django==2.2
+Django>=2.2,<2.3
 psycopg2-binary>=2.7,<2.8
-wagtail>=2.5.1,<=2.5.9
+wagtail>=2.6.3,<2.7
 django-environ>=0.4,<0.5
 django-extensions==2.1.6
 Werkzeug>=0.12,<0.13
