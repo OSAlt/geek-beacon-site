@@ -5,6 +5,6 @@ language: python
 python:
   - "3.6"
 env: 
-  - DJANGO_SETTINGS_MODULE=geekbeacon.settings.dev DJANGO_SECRET_KEY=secret DJANGO_ALLOWED_HOSTS=django 
+  - DJANGO_SETTINGS_MODULE=geekbeacon.settings.dev DJANGO_SECRET_KEY=,jF+43G@$OtX/.G,NWJ1>vHv=ElinDw+HRF:tZbf8aV~G0Cx_4 DJANGO_ALLOWED_HOSTS=django 
 script:
   - pytest # or py.test for Python versions 3.5 and below
