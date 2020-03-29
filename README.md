@@ -7,7 +7,7 @@ This website is a combination of wagtail and features cherry-picked out of the C
 
 There are features that are just simply missing, others that are consciously omitted due to a variety of reasons, we'll call them artistic differences. 
 
-See  [Doc Folder](doc/) for more details
+See  [Doc Folder](docs/) for more details
 
 
 ## Design Choices
