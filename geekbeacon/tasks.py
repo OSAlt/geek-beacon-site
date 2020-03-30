@@ -24,7 +24,7 @@ def get_discourse_tag_topics():
         r = requests.get(url)
         data = r.json()
         if 'error_type' in data:
-            print("tag was not found: not_found")
+            print("tag was not found: {}".format(t.tag.slug))
         else:
             # cache the topic data
             cacheKey = t.tag.slug + '_tag'
@@ -44,7 +44,7 @@ def get_discourse_category_topics():
             categoryTopicsRequest = requests.get('https://forum.geekbeacon.org/c/' + str(slugIdDict[blogCategory.slug]) + '.json')
             categoryTopics = categoryTopicsRequest.json()
             if 'error_type' in categoryTopics:
-                print("category was not found: not_found")
+                print("category was not found: {}".format(str(slugIdDict[blogCategory.slug])))
             else:
                 # cache the topic data
                 cacheKey = blogCategory.slug + '_category'
