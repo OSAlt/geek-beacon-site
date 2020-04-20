@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 from __future__ import absolute_import, unicode_literals
 from celery.schedules import crontab
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -52,47 +53,67 @@ INSTALLED_APPS = [
     'search',
     'blog',
     'geekbeacon',
+    'website',
 
+    # CodeRed CMS
+    'coderedcms',
+    'bootstrap4',
+    'modelcluster',
+    'taggit',
+    'wagtailfontawesome',
+    'wagtailcache',
+    'wagtailimportexport',
+
+    #wagtail
+    'wagtail.admin',
     'wagtail.contrib.forms',
+    'wagtail.contrib.modeladmin',
     'wagtail.contrib.redirects',
     'wagtail.contrib.routable_page',
     'wagtail.contrib.settings',
-    'wagtail.contrib.modeladmin',
-    'wagtail.embeds',
-    'wagtail.sites',
-    'wagtail.users',
-    'wagtail.snippets',
+    'wagtail.contrib.table_block',
+    'wagtail.core',
     'wagtail.documents',
+    'wagtail.embeds',
     'wagtail.images',
     'wagtail.search',
-    'wagtail.admin',
-    'wagtail.core',
+    'wagtail.sites',
+    'wagtail.snippets',
+    'wagtail.users',
     'wagtail_feeds',
 
-
-    'modelcluster',
-    'taggit',
- 
-    'django_extensions',
+    #Django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sessions',
+    'django.contrib.sitemaps',
     'django.contrib.staticfiles',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
+    # Save pages to cache. Must be FIRST.
+    'wagtailcache.cache.UpdateCacheMiddleware',
+
+    # Common functionality
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.common.CommonMiddleware',
+
+    # Security
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
 
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
+
+    # Fetch from cache. Must be LAST.
+    'wagtailcache.cache.FetchFromCacheMiddleware',
+
 ]
 
 ROOT_URLCONF = 'geekbeacon.urls'
@@ -110,6 +131,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'wagtail.contrib.settings.context_processors.settings',
             ],
         },
     },
@@ -127,6 +149,25 @@ ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['geekbeacon.org', '0.0
 DATABASES = {
     'default': env.db('DATABASE_URL', default='postgres:///geek_beacon'),
 }
+
+
+# Password validation
+# https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
 
 CACHES = {
     'default': {
@@ -194,3 +235,17 @@ CELERY_BEAT_SCHEDULE = {
         # 'args': (*args)
     }
 }
+
+# Bootstrap
+BOOTSTRAP4 = {
+    # set to blank since coderedcms already loads jquery and bootstrap
+    'jquery_url': '',
+    'base_url': '',
+    # remove green highlight on inputs
+    'success_css_class': ''
+}
+
+
+# Tags
+
+TAGGIT_CASE_INSENSITIVE = True

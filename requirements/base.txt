@@ -13,3 +13,5 @@ amqp<3.0,>=2.1.4
 python-memcached<2.0,>=1.59
 wagtail-metadata==2.0.0
 kombu==4.5.0
+coderedcms==0.18.0
+django_sendmail_backend
