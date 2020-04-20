@@ -3,22 +3,37 @@ from __future__ import absolute_import, unicode_literals
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.urls import include, path, re_path
 
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail_feeds.feeds import BasicFeed
+from coderedcms import admin_urls as coderedadmin_urls
+from coderedcms import search_urls as coderedsearch_urls
+from coderedcms import urls as codered_urls
 
 from search import views as search_views
 
 urlpatterns = [
-#    url(r'^django-admin/', include(admin.site.urls)),
-#    url(r'^django-admin/', admin.site.urls),
+    # Admin
+    path('admin/', include(coderedadmin_urls)),
+    # path('django-admin/', admin.site.urls),
+    # Documents
+    path('docs/', include(wagtaildocs_urls)),
 
-    url(r'^admin/', include(wagtailadmin_urls)),
-    url(r'^documents/', include(wagtaildocs_urls)),
 
-    url(r'^search/$', search_views.search, name='search'),
+    # Search
+    path('search/', include(coderedsearch_urls)),
+    # the list:
+    re_path(r'', include(codered_urls)),
+
+    # url(r'^documents/', include(wagtaildocs_urls)),
+
+
+    # path('docs/', include(wagtaildocs_urls)),
+
+    # url(r'^search/$', search_views.search, name='search'),
 
     url(r'^rss$', BasicFeed(), name='basic_feed'),
 
