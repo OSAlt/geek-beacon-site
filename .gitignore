@@ -8,3 +8,5 @@ docker-compose.yml
 volumes
 geekbeacon/media
 .DS_Store
+docker-compose.yaml
+docker-compose.override.yml
