@@ -28,7 +28,7 @@ services:
       context: .
       dockerfile: ./compose/production/nginx/Dockerfile
     ports:
-      - "8000:80"
+      - "8200:80"
     volumes:
       - ./compose/production/nginx/config:/etc/nginx/conf.d
     depends_on:
