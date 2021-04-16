@@ -8,7 +8,7 @@ Sphinx==1.6.3
 django-test-plus==1.0.18
 factory-boy==2.9.2
 
-django-debug-toolbar==1.8
+django-debug-toolbar==1.11.1
 
 # improved REPL
 ipdb==0.10.3
